@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	// vanilla javascript (순수한 js)
+	//		작업형태) 함수 정의해놓고, HTML DOM객체 이벤트에 연결
+	//				-> HTML 소스가 길어지면 DOM 객체 찾기 힘듬
+	//				-> 같은 함수 여러개 연결할 때 하나하나 다 써야됨
+	//		언어특성) interpreter방식 언어(에러잡기 힘듬)
+	//				-> 또, 문법이 길어서 더 에러잡기 힘듬
+	//				-> main이 따로 없어서 (body에 onload이벤트 사용)
+	//		=> 개발자 외면 -> jQuery나오면서 최근 핫한 언어 등극
+	
+	// 자바때 기본 생성자에 한번만 만드는 것처럼 input필드도 한번만 불러와야되는게 아닌가
+	// 실행 순서가 위부터 아래라서 아직 xField가 없어서 인식 X => onload 이벤트 사용
+	// var xField = document.getElementById("x"); // form을 안썼을 때 input값 가져오는 코드
+	
+	// 최종 정리
+	var xField;
+	
+	function fakeMain() {
+		xField = document.getElementById("x");
+	}
+	function showX() {
+		alert(xField.value);
+	}
+</script>
+</head>
+<body onload="fakeMain();"> <!-- body 속에 있는거 다 나오고 나서 -->
+	<!-- form 없이 해보기 -->
+	x : <input id="x"><p>
+	y : <input id="y"><p>
+	<button onclick="showX();">계산</button>
+</body>
+</html>

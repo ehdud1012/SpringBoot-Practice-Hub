@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Winnie The Pooh</title>
+<link rel="stylesheet" href="nov04.css">
+</head>
+<body>
+	<table id="siteTitleArea">
+		<tr>	
+			<td align="center">
+				<table id="siteTitle">
+					<tr>
+						<td>
+							<a href="index.do">Winnie The Pooh</a>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" id="siteMenuArea">
+				<table id="siteMenu">
+					<tr>
+						<td align="left">
+							<a href="post.go">POST</a>
+						</td>
+					</tr>
+				</table>
+			</td>		
+		</tr>
+	</table>
+	<table id="siteContentArea">
+		<tr>
+			<td th:insert="~{${contentPage}}" align="center">
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#b1").click(function() {
+			// 생성
+			var m = $("<marquee></marquee>").attr("behavior", "alternate").text("zzzzzzz");
+			var hr = $("<hr>");
+			// div안에 배치  둘다 계속 갯수 상ㅅ관없이 계속 쓸 수 있음
+			$("div").append(m, hr); // 순서대로
+			// $("div").prepend(m); // 역순대로 = 게시판 만들 때
+		});
+		$("#b2").click(function() {
+			// div 삭제 
+			// $("div").remove();
+			// div 속의 친구들만 삭제
+			$("div").empty();
+		});
+	});
+</script>
+<style type="text/css">
+div {
+	border: 3px solid red;
+	width: 300px;
+	height: 300px;
+}
+</style>
+</head>
+<body>
+	<div>
+	</div>
+	<button id="b1">추가</button>
+	<button id="b2">삭제</button>
+</body>
+</html>

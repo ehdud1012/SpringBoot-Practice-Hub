@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() { // body에 있는게 화면에 다 뜨고 나서
+		/*
+			jQuery 한계
+			 	1) 모든 버튼(선택자) => 추가된 버튼 해당 X
+					$("button").click(function() {
+						$("body").append($("<button></button>").text("호에엥"));
+					});
+			 	2) 이벤트 연결하면서 값 전달 X
+		*/
+		/*
+		$("button").click(function() {
+			$("body").append($("<button></button>").text("호에엥"));
+		});*/
+	});
+	function button() {
+		var b = $("<button></button>").text("호에엥").attr("onclick", "button();");
+		$("body").append(b);
+	}
+</script>
+</head>
+<body>
+	<button onclick="button();">버튼인데용</button>
+</body>
+</html>

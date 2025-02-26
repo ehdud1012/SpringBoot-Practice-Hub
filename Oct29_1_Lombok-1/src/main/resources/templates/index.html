@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="oct29.css">
+</head>
+<body>
+	<table id="siteTitleArea">
+		<tr>	
+			<td align="center">
+				<table id="siteTitle">
+					<tr>
+						<td>
+							<a href="index.do">WINNE THE POOH</a>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" id="siteMenuArea">
+				<table id="siteMenu">
+					<tr>
+						<td align="left" class="td1">
+							<a href="lotto.go">THYMELEAF</a>
+							<a href="lombok.go">LOMBOK</a>
+						</td>
+					</tr>
+				</table>
+			</td>		
+		</tr>
+	</table>
+	<table id="siteContentArea">
+		<tr>
+			<td th:insert="~{${contentPage}}" align="center">
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

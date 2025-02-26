@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	// DOM 객체
+	$(function() {
+		$("#b1").click(function() {
+			// 새 카페 -> 룰루
+			$("a").text("룰루");
+			// DOM 객체 속성 변경
+			// $("선택자").attr("속성명", :값);
+			$("a").attr("href", "https://www.notion.so/jQuery-142fce5118d38031bae1e4185c1b3531");
+			var n = 1;
+			setInterval(function() {
+				n++;
+				if(n == 6){
+					n = 1;
+				}
+				$("img").attr("src", "hero_walk_0"+n+".png");
+			}, 100);
+		});
+		$("#b2").click(function() {
+			// 없는 속성 추가
+			// 추가가 따로 있진 않고
+			// 있는 속성이면 수정이고, 없으면 추가	
+			$("a").attr("id", "aa");
+		});
+		$("#b3").click(function() {
+			// 조회
+			alert($("a").attr("href"));
+		});
+		$("#b4").click(function() {
+			// 속성의 값 삭제
+			// $("a").attr("href", "");
+			// 속성 자체 삭제
+			$("a").removeAttr("href");
+		});
+	});
+</script>
+<style type="text/css">
+	#aa{
+		background-color: red;
+	}
+</style>
+</head>
+<body>
+	<a href="http://sd-beanmouse.duckdns.org">새 카페</a>
+	<button id="b1">수정</button>
+	<hr>
+	<img src="hero_walk_01.png">
+	<hr>
+	<button id="b2">추가</button>
+	<button id="b3">조회</button>
+	<button id="b4">삭제</button>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		/*
+			AJAX - 외부데이터 X (브라우저의 동일출처 정책 때문에)
+				 - 같은 컴퓨터여도 X
+						var url = "http://192.168.0.55/snack.get?price=0";
+						$.getJSON(url, function(data) {
+							alert(JSON.stringify(data));
+						});
+			Cross-Domain AJAX - 외부데이터 AJAX
+				하는 방법
+				1) 서버 측에서 - 응답헤더 Access-Control-Allow-Origin을 세팅 했는가 
+							▼ 예시
+						@GetMapping(value = "/snack.get", produces = "application/json;charset=utf-8")
+						public @ResponseBody Snacks snackGet(Snack s, HttpServletResponse res) {
+							res.setHeader("Access-Control-Allow-Origin", "*");
+							return sDAO.snackGetToJson(s);
+						}
+				2) 
+			
+		*/		
+		/* var url = "http://192.168.0.56/snack.get?price=0";
+		$.getJSON(url, function(snackData) {
+			alert(JSON.stringify(snackData));
+		}); */
+	/* var url = "https://api.openweathermap.org/data/2.5/weather?q=seoul&appid=baff8f3c6cbc28a4024e336599de28c4&units=metric&lang=kr";
+		$.getJSON(url, function(data) {
+			alert(JSON.stringify(data));
+		});
+		*/
+		/*
+			HTML5 : add-on
+				그래픽, HTML주제에 전화가능
+				=> 하이브리드 앱 필요 X
+				
+			현재 위치 받기 - navigator
+				위치 정보
+					navigator.geolocation
+					
+				현 위치 = 클라이어트 위치
+					- GPS 있으면 GPS 쓰고 없으면 IP주소로 짐작 (정확도 ↓)
+					- HTML 단독 실행, localhost로 시작 O
+					- 서버에서 정식 주소로 하면 X
+						http  - X
+						https - O
+					navigator.geolocation.getCurrentPosition(콜백함수);
+		*/		
+		navigator.geolocation.getCurrentPosition(function(location) {
+			$("#weatherTbl").empty();
+			var lat = location.coords.latitude;
+			var lng = location.coords.longitude;
+			var url = "https://api.openweathermap.org/data/2.5/weather?lon="+ lng + "&lat=" + lat +"&appid=baff8f3c6cbc28a4024e336599de28c4&units=metric&lang=kr";
+			$.getJSON(url, function(WeatherData) {
+				$.each(WeatherData, function(a, b) {
+					WeatherData
+					$.each(WeatherData.weather, function(a, bb) {
+						var descriptionTd = $("<td></td>").text(bb.description);
+					});
+					$.each(WeatherData.main, function(a, bbb) {
+						var tempTd = $("<td></td>").text(bbb.temp);
+						var humidityTd = $("<td></td>").text(bbb.humidity);
+					});
+				});
+				$("#weatherTbl").append($("<tr></tr>").append(descriptionTd, tempTd, humidityTd));
+			});
+		});
+	}); 
+</script>
+</head>
+<body>
+	<table id="weatherTbl" border="1"></table>
+</body>
+</html>

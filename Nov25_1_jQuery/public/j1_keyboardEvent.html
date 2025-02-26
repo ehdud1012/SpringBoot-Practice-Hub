@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		// 키보드 - 키 누름
+		// input에서 a키 누르면 : input에 a가 적힘
+		//		keydown -> a가 적힘 -> keyup 
+		
+		// 키보드를 누를 때
+		$("input").keydown(function(e) {
+			// e.keyCode : 키보드 아스키값
+			$("h1").text("keydown : " + e.keyCode);
+		
+			// a키가 적히기 전에(keydown) a키 막아버리기
+			if(e.keyCode == 65){
+				return false;
+			}
+		});
+		// 키보드를 땔 때
+		$("input").keyup(function(e) {
+			$("h1").text("keyup : "  + e.keyCode);
+			if(e.keyCode == 13){
+				alert("enter");
+			}
+		});
+		var x = $("img").offset().left;
+		var y = $("img").offset().top;
+		
+		// 이미지 움직이기
+		$("html").keydown(function(e) {
+			if(e.keyCode == 39){
+				x += 5;
+			}else if(e.keyCode == 37){
+				x -= 5;
+			}else if(e.keyCode == 38){
+				y -= 5;
+			}else if(e.keyCode == 40){
+				y += 5;
+			}
+			$("img").css("top", y + "px");
+			$("img").css("left", x + "px");
+		});
+	});
+</script>
+<style type="text/css">
+	img {
+		position: fixed; 
+	}
+</style>
+<body>
+	<input>
+	<h1></h1>
+	<img src="pooh_santa2.png">
+</body>
+</html>

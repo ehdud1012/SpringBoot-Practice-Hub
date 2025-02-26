@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+	function d(name) {
+		location.href = "restaurant.del?name=" + name;
+	}
+	function u(name, addr) {
+		addr = prompt("주소", addr);
+		location.href = "restaurant.update?name=" + name + "&addr=" + addr;
+	}
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="reg.restaurant">
+		이름 : <input name="name"><p>
+		주소 : <input name="addr"><p>
+		<button>RESTAURANT</button>
+	</form>
+	<hr>
+	<table border="1">
+		<tr>
+			<th>이름</th>
+			<th>주소</th>
+		</tr>
+		<tr th:each="r : ${r}">
+			<td th:text="${r.name}" th:onclick="d([[${r.name}]])"></td>
+			<td th:text="${r.addr}" th:onclick="u([[${r.name}]], [[${r.addr}]])"></td>
+			<td>
+				<div th:each="m : ${r.m}">
+					<div th:text="${m.name}"></div>
+					<div th:text="${m.price}"></div>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<hr>
+	<p>
+	<form action="reg.menu">
+		이름 : <input name="name"><p>
+		가격 : <input name="price"><p>
+		매장이름 : <input name="res"> <p>
+		<!-- 
+		<select name="restaurant">
+			<option th:each="rn : ${resName}">[[${rn}]]</option>
+		</select><p>
+		
+		 -->
+		<button>MENU</button>
+	</form>
+	<hr>
+	<table border="1">
+		<tr>
+			<th>번호</th>
+			<th>이름</th>
+			<th>가격</th>
+			<th>매장이름</th>
+			<th>매장위치</th>
+		</tr>
+		<tr th:each="m : ${m}">
+			<td th:text="${m.no}"></td>
+			<td th:text="${m.name}"></td>
+			<td th:text="${m.price}"></td>
+			<td th:text="${m.res.name}"></td>
+			<td th:text="${m.res.addr}"></td>
+		</tr>
+	</table>
+</body>
+</html>

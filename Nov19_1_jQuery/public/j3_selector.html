@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		/*
+			선택자
+				JS내장객체
+				"CSS선택지"
+				변수명
+				this : callback함수을 부른 친구
+				메소드
+					.parent() 			: 한단계 상위 객체
+					.closest("CSS선택자") : 상위 객체 중에 가장 가까운 "CSS선택자"
+					.children() 		: 한단계 하위 객체(들)
+					.find("CSS선택자")	: 하위 객체 중에 가장 가까운 "CSS선택자"
+		*/
+		$("button").click(function() {
+			// 눌러진 버튼의 배경
+			$(this).css("background-color", "#ffd470");
+			// 눌러진 버튼의 상위 객체 중에서 가장 가까운 table의 세로 
+			$(this).closest("table").css("height", "500px");
+			// 눌러진 버튼 옆에 있는 input의 내용
+			alert($(this).parent().find("input").val());
+		});
+	
+		$("input").click(function() {
+			// 눌러진 input이 소속된 td (한 단계 상위 객체)
+			$(this).parent().css("background-color", "#7086ff");
+		});
+		
+		$("td").click(function() {
+			// 눌러진 td안에 있는 객체들 (한 단계 하위 객체들)
+			$(this).children().css("color", "#ff70ce");
+			// 눌러진 td안에 있는 객체 중 button
+			$(this).find("button").css("width", "100px");
+		});
+		
+	});
+</script>
+<style type="text/css">
+	td {
+		padding: 20px;
+	}
+	input {
+		margin-right: 5px;
+	}
+</style>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<td>
+				<input><button>버튼</button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input><button>버튼</button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input><button>버튼</button>
+			</td>
+		</tr>
+	</table>
+	<p>
+	<table border="1">
+		<tr>
+			<td>
+				<input><button>버튼</button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input><button>버튼</button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input><button>버튼</button>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

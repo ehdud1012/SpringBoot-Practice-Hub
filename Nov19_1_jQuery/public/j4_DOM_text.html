@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		/*
+			HTML DOM 객체를 수정
+				DOM (Document Object Model)
+		   			- <태그명 속성명="값" 속성명="값" ...>  텍스트  </태그명> 	
+		                               	 <시작 태그>  텍스트  <종료 태그>
+		       		- 텍스트가 없어도 되면 <태그명 />
+		    DOM객체의 텍스트 부분 수정
+		    	1. $("선택자").text("바뀔 내용"); - 내용을 모두 text로 인식
+		    	2. $("선택자").html("바뀔 내용"); - DOM 객체를 인식하여 변경
+		*/
+		$("#b1").click(function() {
+			// div의 텍스트 바뀌게
+			// 1. $("div").text("b1");
+			$("div").html("<h1>b1</h1>");
+			//$("div").text("<h1>b1</h1>");
+		});
+		$("#b2").click(function() {
+			alert($("div").text());
+		});
+		$("#b3").click(function() {
+			// 글자 차례대로 나오게
+			$("div").text("한");
+			setTimeout(function() {
+				$("div").text("한글");
+				setTimeout(function() {
+					$("div").text("한글자");
+				}, 1000);
+			}, 1000);
+			/*
+			// 중첩되면 코드 순으로 1초 다음 1초 이게 아니고 동시에 1초가 세어짐
+			setTimeout(function() {
+				$("div").text("한글");
+			}, 1000);
+			*/
+		});
+	});
+</script>
+</head>
+<body>
+	<div>1</div>
+	<button id="b1">버튼1</button>
+	<button id="b2">버튼2</button>
+	<button id="b3">버튼3</button>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+canvas{
+	border: black solid 3px;
+}
+</style>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var paper = document.getElementById("paper");
+		var pen = paper.getContext("2d");
+		pen.fillStyle = "#8a98db"; // 면 계열 그릴때 색
+		// 사각형은 2D의 기본이라 있지만(fillRect) 다른 도형은 X
+		pen.fillRect(30, 30, 50, 50);
+		
+		// 선 그릴때 색
+		pen.strokeStyle = "#8adbcd";	
+		pen.lineWith = 5; // 선 두께
+	
+		// 다른 도형은 그냥 직접 그리기
+		pen.beginPath(); // 지금부터 새 선을 그리겠다 (준비스타트)
+		pen.moveTo(80, 80); // 펜을 (80, 80)에 갖다 놓고
+		pen.lineTo(150, 150); // 선을 (80, 80)에서 (150, 150)까지 그리겠다
+		pen.closePath(); // 준비 끗 (정보넣기 끝)
+		pen.stroke(); // 이제 그리기
+		
+		var pooh = new Image();
+		// 그림 파일 그리기
+		pooh.src = "pooh_santa1.png"; 
+		// 만약 이미지가 불러오기도 전에 그려버리면 안되니까 장치 추가
+		pooh.onload = function() { // JS식 문법
+			// pooh그림이 불러와지고 나서 시작
+			pen.drawImage(pooh, 150,150, 150, 150); // 이미지, x, y, 가로, 세로
+			
+			// 상태변화가 생기기 전에 저장(그림자 X)
+			pen.save(); // pen에 세팅된거 저장
+			
+			// 그림자 생성
+			pen.shadowOffsetX = 5;
+			pen.shadowOffsetY = 5;
+			pen.shadowBlur = 20;
+			pen.shadowColor = "#365656";
+			pen.fillRect(300, 300, 100, 100);
+			
+			// 저장된거 가져와서 적용하기 (그림자 없애기)
+			pen.restore();			
+			pen.fillRect(200, 300, 50, 50);
+			
+		};
+	});
+</script>
+</head>
+<body>
+	 <canvas id="paper" width="500px" height="500px"></canvas>
+</body>
+</html>

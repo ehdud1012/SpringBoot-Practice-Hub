@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 th:text="${d.fileD_name}" class="title"></h1>
+	<a th:href="|download/${d.fileD2}|" th:text="${d.fileD2}" class="title"></a>
+	<!-- 
+		a : GET방식 요청
+			브라우저가 열줄아는 파일(html, png, ...)	: 열기
+			브라우저가 열줄 모르는 파일(jar, ...) 		: 다운받기
+		
+		상대경로를 사용 못하는 상황
+	 -->
+</body>
+</html>

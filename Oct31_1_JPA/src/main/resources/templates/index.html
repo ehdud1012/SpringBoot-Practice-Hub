@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+	function d(name) {
+		location.href = "snack.del?name=" + name;
+	}
+	function u(name, price) {
+		price = prompt("가격", price);
+		location.href = "snack.update?name=" + name + "&price=" + price;
+	}
+</script>
+<title>냐하</title>
+</head>
+<body>
+	<form action="snack.reg">
+		이름 : <input name="name"><p>
+		가격 : <input name="price"><p>
+		<button>SNACK</button>
+	</form>
+	<hr>
+	
+	<table border="1">
+		<tr>
+			<th>이름</th>
+			<th>가격</th>
+		</tr>
+		<tr th:each="s : ${snacks}"> <!-- 변수명 : ${리스트} -->
+			<td th:text="${s.name}" th:onclick="d([[${s.name}]])"></td>
+			<td th:text="${s.price}" th:onclick="u([[${s.name}]], [[${s.price}]])"></td>
+		</tr>
+	</table>
+</body>
+</html>

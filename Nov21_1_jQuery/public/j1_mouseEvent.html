@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		/*
+		마우스 클릭이벤트
+		// 대충 (click, dblclick, ...)
+		$("div").click(function() {
+			$("h1").text("클릭함");
+		});
+		
+		// 섬세하게 (mousedown, mouseup)
+		$("div").mousedown(function() {
+			$("h1").text("mousedown");
+		});
+		$("div").mouseup(function() {
+			$("h1").text("mouseup");
+		});
+		*/
+		/*
+			$("선택자").이벤트
+			이벤트에 연결되는 콜백함수 첫번째 파라메터에 이벤트 정보가 담김
+		*/
+		$("div").mouseup(function(e) {
+			// e.button : 무슨 마우스 버튼인지 알 수 있음 (좌0, 휠1 우2)
+			$("h1").text("mouseup : " + e.button); 
+		});
+		/*
+			마우스 엔터이벤트 - 움직임 관련
+		*/
+		// div 안에 있을 때
+		$("div").mouseenter(function() {
+			$("h2").text("mouseenter");
+		});
+		// div 밖에 있을 때
+		$("div").mouseleave(function() {
+			$("h2").text("mouseleave");
+		});
+		
+		// 객체 위치 찾기 : 마우스 이벤트는 아님
+		var divX = $("div").offset().left;
+		var divY = $("div").offset().top;
+		// alert(divX+", "+ divY);
+		
+		// 마우스 움직일때 
+		$("div").mousemove(function(e) {
+			// 마우스 좌표 -> 객체 기준X html기준
+			// var xy = e.pageX + "," + e.pageY;
+			// 객체 기준
+			var xy = (e.pageX-divX) + "," + (e.pageY-divY);
+			$("h3").text("mousemove : " + xy);
+		});
+		/*
+			이벤트
+			기본기능이 없는 - ex) 빈화면 클릭
+			기본기능이 있는 - ex) input에서 a키 치기 -> a가 적힘
+				기본기능이 있는 이벤트의 콜백함수에 return false; => 그 기능이 막힘
+		*/
+		
+		// 우클릭 했을 때 메뉴나오게 : 엄밀히 따지면 메뉴 X
+		// 1) 기본 크롬 우클릭 메뉴 삭제 (기본기능 O)
+		$(document).contextmenu(function() { // 우클릭해서 그 메뉴 나올 때
+			return false;
+		});
+		$("html").mouseup(function(e) {
+			if(e.button == 2){
+				$("table").css("top", e.pageY);
+				$("table").css("left", e.pageX);
+				setTimeout(function () {
+					$("table").css("top", "-300px");
+				}, 3000);
+			}
+		});
+		
+	});
+</script>
+<style type="text/css">
+	div {
+		width: 200px;
+		height: 200px;
+		border: black solid 3px; 
+	}
+	table {
+		/* position: fixed; 브라우저 기준 */
+		position: absolute; /* html 기준 */
+		top: -300px;
+	}
+</style>
+<body>
+	<div></div>
+	<h1></h1>
+	<h2></h2>
+	<h3></h3>
+	
+	<table border="1">
+		<tr>
+			<td>
+				<a href="https://sdgn-djvemfu.tplinkdns.com/index.do">카페</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://sd-beanmouse.duckdns.org">구 카페</a>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,97 @@
+@charset "UTF-8";
+@font-face{
+	font-family: "k";
+	src: url("king.ttf");
+}
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: "k";
+}
+table {
+	border-spacing: 0px;
+}
+
+a{
+	text-decoration: none;
+	font-family: "k";
+}
+
+#siteTitleArea {
+	width: 100%;
+	background-color: white;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 130px;
+}
+
+#siteTitle {
+	width: 1200px;
+}
+
+#siteTitle a{
+	color: #133E87;
+	font-size: 40px;
+	font-weight: 900;
+}
+
+#siteMenuArea {
+	background-color: #608BC1;
+}
+
+#siteMenu {
+	width: 1200px;
+}
+
+#siteMenu a{
+	color: #CBDCEB;
+	font-size: 25px;
+	margin-left: 20px;
+}
+
+#siteContentArea {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1200px;
+	padding-top: 180px;
+}
+
+.imgTbl {
+	width: 800px;
+	font-size: 35px;
+	color: #133E87;
+}
+
+.imgTbl th{
+	font-size: 40px;
+	padding-bottom: 30px;
+}
+.imgTbl input{
+	font-size: 33px;
+	width:500px;
+	outline: none;
+	border: #608BC1 solid 2px;
+	background-color: transparent;
+	border-radius: 10px;
+	font-family: "k";
+	color: #608BC1;
+	padding-left: 10px;
+	margin-bottom: 10px;
+}
+
+.imgTbl button {
+	margin-top: 100px;
+	width:300px;
+	height: 40px;
+	font-size: 30px;
+	border-radius: 10px;
+	color: #CBDCEB;
+	font-family: "k";
+	background-color: #608BC1;
+	border: none;
+}
+
+.title {
+	font-size: 60px;
+}

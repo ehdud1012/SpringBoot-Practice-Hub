@@ -1,0 +1,59 @@
+@charset "UTF-8";
+@font-face{
+	font-family: "k";
+	src: url("king.ttf");
+}
+body {
+	padding: 0px;
+	margin: 0px;
+	font-family: "k";
+}
+
+table {
+	border-spacing: 0;
+	font-family: "k";
+}
+
+.bmiTbl {
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 500px;
+	border: black solid 3px;
+	font-family: "k";
+	font-size: 20px;
+}
+
+.bmiTbl th {
+	font-size: 50px;
+	padding-bottom: 10px;
+}
+
+.bmiTbl input {
+	border: none;
+	background-color: black;
+	border-radius: 10px;
+	color: white;
+	width: 400px;
+	padding: 6px;
+	text-decoration: none;
+	margin-bottom: 10px;
+	font-family: "k";
+	font-size: 20px;
+}
+
+.bmiTbl button {
+	border: black solid 3px;
+	background-color: white;
+	border-radius: 10px;
+	color: black;
+	width: 300px;
+	padding: 6px;
+	text-decoration: none;
+	margin-bottom: 10px;
+	font-family: "k";
+	font-size: 20px;
+}
+.bmiTbl input::placeholder {
+	color: white;
+}

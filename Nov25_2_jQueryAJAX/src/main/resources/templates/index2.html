@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		/*			비동기식
+			AJAX(Asynchronous Javascript And XML), (front-end 개발자한테 제일 중요한 기술)
+				- JS로 비동기식 통신해서 XML파싱
+				- 외부 데이터 활용 불가 (기상청, 공공데이터, ...)
+				- 동기식 - 서버에게 요청을 날리고 응답이 올때까지 프로그램 stop
+				  비동기식 - 응답이 오든 말든 프로그램이 쭉 이어져서 계속 프로그램 사용가능
+				  			: 응답없음이 안뜸 (안멈춰서)
+				- 문법 
+							- 인터넷 주소 체계
+								프로토콜://서버주소:포트/폴더명/.../파일?변수명=값&변수명=값& ...
+								http - 포트 80생략가능
+								https - 포트 443생략가능
+								폴더 ROOT 생략가능
+								파일 index 생략가능
+					$.ajax({
+						url : "주소", // 변수명 작성X (파일명까지만)
+						data: {"요청파라메터명" : "값", "요청파라메터명" : "값", ...},
+						beforeSend : function(요청객체){ 
+							요청객체.setRequestHeader("헤더명", "값");
+							요청객체.setRequestHeader("헤더명", "값"); ...
+						},
+						success : function(받은거){ //응답 성공하면 호출되는 콜백함수
+							
+						} 
+					});
+			외부데이터 X 예시 ▽ 
+			 		기상청으로 요청 -> 기상청이 응답해줌 -> 브라우저가 거부(동일출처정책)
+				Cross-Domain AJAX : 외부데이터 사용 가능한 AJAX
+				Reverse AJAX : 현 이 기술의 최고
+					- 찐/흉내만 낸거
+					- polling 방식 (흉내, like 디도스)
+			$.ajax({
+				url : "https://www.kma.go.kr/wid/queryDFSRSS.jsp",
+				data: { "zone" : "1111061500" },
+				success : function(weatherData){ 
+					alert(weatherData);
+				} 
+			});		
+			alert("z"); // 위의 요청 응답이 안돌아와도 멈추지 않기에 나옴
+			----------------------------------------------------------------------
+			var a = 10;
+			$.ajax({
+				url : "drink.get", // 같은 프로젝트라 생략가능 (http://localhost/drink.get)
+				success : function(drinkData){ 
+					alert(drinkData);
+				} 
+			});		
+			alert(a); // 비동기식이라 요청의 응답이 돌아오기 전에 실행되서 10
+		polling 방식
+			setInterval(function(){
+				$.ajax({
+					url : "drink.get",
+					success : function(drinkData){ 
+						$("#drinkTbl").empty();
+						
+						$(drinkData).find("drink").each(function(index, dom) {
+							var nameTd = $("<td></td>").text($(dom).find("name").text());
+							var priceTd = $("<td></td>").text($(dom).find("price").text());
+							$("#drinkTbl").append($("<tr></tr>").append(nameTd, priceTd));
+						});
+					} 
+				});	
+			}, 1000);
+		*/
+		 $.ajax({
+			url : "drink.get",
+			success : function(drinkData){ 
+				$("#drinkTbl").empty();
+				// XML 파싱 : 데이터를 HTML DOM 객체으로 표현
+				$(drinkData).find("drink").each(function(index, dom) {
+					var nameTd = $("<td></td>").text($(dom).find("name").text());
+					var priceTd = $("<td></td>").text($(dom).find("price").text());
+					$("#drinkTbl").append($("<tr></tr>").append(nameTd, priceTd));
+				});
+			} 
+		}); 
+		
+		/* 
+			JSON 파싱 : 데이터를 JS모양으로 표현
+				XML vs JSON
+					압도적 JSON이 좋음 / XML이 가독성 하나는 좋음 
+			정식 문법
+				$.ajax({
+					url : "snack.get",
+					data: { "price" : "1500" },
+					success : function(snackData){ 
+						// JS객체를 -> 문자열로 변경 가능
+						//		잘받아진건지 확인 가능
+						alert(JSON.stringify(snackData));
+					} 
+				});
+			JSON일때만(XML은 안됌) 쓸 수 있는 간단한 버전 AJAX
+				$.getJSON("주소 풀버전 (파라메터값 포함)", 콜백함수);
+		*/
+		$("#button").click(function(){
+			$.getJSON("snack.get?price="+ $("#price").val(), function(snackData){
+				$("#snackTbl").empty();
+				/*
+				var snacks = snackData.snack;
+				for (var i = 0; i < snacks.length; i++) {
+					var nameTd = $("<td></td>").text(snacks[i].name);
+					var priceTd = $("<td></td>").text(snacks[i].price);
+					$("#snackTbl").append($("<tr></tr>").append(nameTd, priceTd));
+				} 
+				*/
+				
+				$.each(snackData.snack, function(a, b) {
+					var nameTd = $("<td></td>").text(b.name);
+					var priceTd = $("<td></td>").text(b.price);
+					$("#snackTbl").append($("<tr></tr>").append(nameTd, priceTd));
+				});
+			});
+		});
+		
+		$("#price").keyup(function(e){
+			$("#button").trigger("click"); // 실시간 검색 가능 => AJAX를 사용하는 이유 (비동기식)
+			
+			/* if(e.keyCode == 13){ 
+				// 버튼 클릭이벤트 = input 키보드 이벤트 기능 똑같게
+				// 이벤트 강제 발생
+				//	 $(선택자).trigger(이벤트);
+				// 버튼을 클릭한것 처럼 
+				$("#button").trigger("click");
+			} */
+		});
+	});
+</script>
+</head>
+<body>
+	<input id="price">
+	<button id="button">확인</button>
+	<table border="1" id="snackTbl"></table>
+	<p>
+	<hr>
+	<p>
+	<table border="1" id="drinkTbl">
+
+	</table>
+	<hr>
+	<table border="1">
+		<tr>
+			<th>상품명</th>
+			<th>가격</th>
+		</tr>
+		<tr th:each="d : ${drinks}">
+			<td>[[${d.name}]]</td>
+			<td th:text="${#numbers.formatInteger(d.price, 1, 'COMMA')}"></td>
+		</tr>
+	</table>
+</body>
+</html>

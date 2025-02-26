@@ -1,0 +1,89 @@
+@charset "UTF-8";
+@font-face{
+	font-family: "k";
+	src: url("king.ttf");
+}
+
+body {
+	margin:0px;
+	padding: 0px;
+	background-color: #EEE5D3;
+	color: #F2EBDC;
+	font-family: "k";
+}
+
+a{
+	text-decoration: none;
+	font-family: "k";
+}
+
+table {
+	border-spacing: 0px;
+	font-family: "k";
+}
+
+#siteTitleArea{
+	width: 100%;
+	height: 100px;
+	background-color: #BFA688;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index : 1;
+}
+
+#siteTitle {
+	padding-top:10px;
+	width: 600px;
+}
+
+#siteTitle a {
+	color: #F2EBDC;
+	font-size: 35px;
+	font-weight: 900;
+	font-family: "k";
+}
+
+#siteMenuArea {
+	background-color: #BFA688;
+	padding: 10px;
+}
+
+#siteMenu{
+	width: 600px;
+	height: 20px;
+	font-family: "k";
+	padding-left: 20px;
+}
+
+#siteMenu .td1 a{
+	color: #F2EBDC;
+	padding-right:30px;
+	font-weight: 900;
+	font-size: 13px;
+}
+
+#siteContentArea {
+	color: black;
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 110px;
+}
+
+#homeimg {
+	width: 300px;
+	opacity: 0.5;
+}
+
+#rePick, #calc{
+	margin-top: 20px;
+	font-family: b;
+	padding: 10px;
+	font-size: 17px;
+	border-radius: 10px;
+	border: none;
+	background-color:  #BFA688;
+	color: #EEE5D3;
+	font-family: "k";
+}

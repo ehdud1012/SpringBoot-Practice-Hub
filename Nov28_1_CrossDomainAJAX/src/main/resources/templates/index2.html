@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		/*
+			Cross-domain AJAX - 외부데이터 O AJAX
+				1) 서버 측에서 응답헤더 설정 : 해결책 X (만약 안되어있으면? ▽ 2번)
+				2) 프록시 서버
+					Java - 외부데이터 가능
+					=> ajax를 내 C로 연결해서 M,C에서 외부데이터 사용
+					1. V-C 연결 green
+					2. C-M 연결 pink
+					3. M-기상청 연결 blue
+					4. V링크 내 C링크로
+					
+			red
+				$.ajax({
+					url : "https://www.kma.go.kr/wid/queryDFSRSS.jsp",
+					data: { "zone" : "1111061500" },
+					success : function(weatherData){ 
+						alert(weatherData);
+					} 
+				});	
+		 */
+		$.ajax({
+			url : "weather.get",
+			data : {
+				"zone" : "1111061500"
+			},
+			success : function(weatherData) {
+				var date = $("<th></th>").attr("colspan", "3").text($(weatherData).find("header").find("tm").text());
+				$("#weatherTbl").append($("<tr></tr>").append(date));
+				$(weatherData).find("data").each(function(index, dom){
+					var hour = $("<td></td>").text($(dom).find("hour").text() + "시");
+					var temp = $("<td></td>").text($(dom).find("temp").text() + "");
+					var wfKor = $("<td></td>").text($(dom).find("wfKor").text());
+					var w = $("<tr></tr>").append(hour, temp, wfKor);
+					$("#weatherTbl").append(w);
+				});
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<table id="weatherTbl" border="1">
+	</table>
+</body>
+</html>

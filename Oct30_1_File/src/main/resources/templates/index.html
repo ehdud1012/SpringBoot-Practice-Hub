@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="oct30.css">
+</head>
+<body>
+	<table id="siteTitleArea">
+		<tr>	
+			<td align="center">
+				<table id="siteTitle">
+					<tr>
+						<td>
+							<a href="index.do">FILE</a>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" id="siteMenuArea">
+				<table id="siteMenu">
+					<tr>
+						<td align="left">
+							<a href="imgFile.go">IMG_File</a>
+							<a href="second.go">IMG_File2</a>
+							<a href="download.go">IMG_Download</a>
+						</td>
+					</tr>
+				</table>
+			</td>		
+		</tr>
+	</table>
+	<table id="siteContentArea">
+		<tr>
+			<td th:insert="~{${contentPage}}" align="center">
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

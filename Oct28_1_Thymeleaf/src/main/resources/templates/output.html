@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function show(a, b){
+		alert(a);
+		alert(b);
+	}
+</script>
+<link rel="stylesheet" href="oct281.css">
+</head>
+<body>
+	<!-- 
+		 Servlet이 JAva베이스에 HTML+CSS+JS를 직접 칰
+		JSP : 	HTML+CSS+JS 베이스에 필요한 부분에 Java소스 넣는 형태
+				MVC에 대한 교려 X
+				EL + JSTL이 필요
+		
+		
+		MVC측면에서는 JSP는 부족한 기술
+		-> SpringBoot에서는 JSP말고 템플릿 엔진(ex - Thymeleaf) 사용 권장
+		---------------------------------------------
+		Thymeleaf (EL + JSTL + JSP표준액션태그)
+		- 형태
+			- EL + JSTL + JSP표준액션태그 : 새로운 DOM
+				디자이너가 배워서 완성시키셈 - 못함
+			- Thymeleaf : 기존 DOM에 속성 형태로 추가 / 값 받기는 EL과 비슷
+				디자이너가 HTML을 하면, 개발자가 th:xxx 덧붙이기
+	 -->
+	 
+	 <table border="1">
+	 	<tr>
+	 		<th colspan="2">EL</th>
+	 		 <!-- 
+				- EL처럼 단독 사용: [[${문법}]]
+				- req param : ${param.파라메터명}
+				- req attr(기본형급) : ${어트리뷰트명}
+				- 연산자 사용 가능
+					EL보다 형 변환이 약한 느낌
+				- 문자열 붙이기 : 앞뒤로 |
+				
+				- req attr(객체급) : ${어트리뷰트명.멤버변수명}			
+				- req attr(컬렉션급) : ${어트리뷰트명[인덱스]}
+				- session attr : ${session.이름}
+			  -->
+	 	</tr>
+	 	<tr>
+	 		<td>단독 사용</td>
+	 		<td>[[${param.x}]]</td>
+	 	</tr>
+	 	<tr>
+	 		<td>req param</td>
+	 		<td th:text="${param.y}"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>req attr(기본형급)</td>
+	 		<td th:text="${q}"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>연산자 사용 가능</td>
+	 		<td th:text="${w + 3}"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>문자열 붙이기</td>
+	 		<td th:text="|${w} ㅋ ㄴ|"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>req attr(객체급)</td>
+	 		<td th:text="${dogs[1].name}"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>req attr(컬렉션급)</td>
+	 		<td th:text="${dogs2['나'].name}"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>session attr</td>
+	 		<td th:text="${session.t}"></td>
+	 	</tr>
+	 </table>
+	
+	 <table border="1">
+	 	<tr>
+	 		<th>JSTL</th>
+	 	</tr>
+	 	<tr>
+	 		<td th:if="${q > 10}">조건 맞으면 여기가 나옴 / 아니면 안나옴</td>
+	 	</tr>
+	 	<tr>
+	 		<td th:unless="${q > 100}">조건 안맞으면 이게 나옴</td>
+	 	</tr>
+	 	<tr><td>
+	 		<table border="1">
+				<tr>
+			 		<th>이름</th>
+				 	<th>나이</th>
+				 </tr>
+				 <tr th:each="d : ${dogs}"> <!-- 변수명 : ${리스트} -->
+				 	<td th:text="${d.name}"></td>
+				 	<td th:text="${d.age}"></td>
+				</tr>
+			</table>
+	 	</td></tr>
+	 	<tr><td>
+	 		<table border="1">
+			 	<!-- 변수명(내용), 변수명(정보) : ${리스트} -->
+			 	<tr th:each="d, info : ${dogs}">
+			 		<td th:text="${d.name}"></td>
+			 		<td th:text="${d.age}"></td>
+			 		<!--<td th:text="${info}"></td>-->
+			 		<td th:text="${info.index}"></td>
+			 	</tr>
+			 </table>
+	 	</td></tr>
+	 	<tr><td>
+	 		 <table border="1">
+			 	<tr th:each="d : ${dogs2}">
+			 		<!--<td th:text="${d}"></td>-->
+			 		<td th:text="${d.key}"></td>
+			 		<!--<td th:text="${d.value}"></td>-->
+			 		<td th:text="${d.value.name}"></td>
+			 		<td th:text="${d.value.age}"></td>
+			 	</tr>
+			 </table>
+	 	</td></tr>
+	 </table>
+	 <table border="1">
+	 	<tr><th colspan="2">JSTL Formatting</th></tr>
+	 	<tr>
+	 		<td>세 자리마다 , <br>(값, 최소자리수, '구분자')</td>
+	 		<td th:text="${#numbers.formatInteger(r, 1, 'COMMA')}"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>소수점이하 자리수 <br>(값, 정수 최소자리수, <br>소수자리수)</td>
+	 		<td th:text="${#numbers.formatDecimal(rr, 1, 2)}"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>날짜 <br>(값, '형식')</td>
+	 		<td th:text="${#dates.format(date, 'yyyy-MM-dd')}"></td>
+	 	</tr>
+	 </table>
+	 
+	 <table border="1">
+	 	<tr><th>Thymeleaf 이라서</th></tr>
+	 	<tr>
+	 		<td>	
+	 			<!-- 
+	 				th:속성명
+	 				값이 경로 계열이면 @{}로 둘러서
+	 			 -->
+	 			<img th:src="@{${img}}" width="100px">
+	 		</td>
+	 	</tr>
+	 	<tr>
+	 		<td>
+	 			<a th:href="@{${root}}">네이버로</a>
+	 		</td>
+	 	</tr>
+	 	<tr>
+	 		<td th:onclick="show([[${z}]], [[${x}]]);">같이 쓰면 안되고 단독버전으로 해줘야댐</td>
+	 	</tr>
+	 </table>
+	 <table border="1">
+	 	<tr><th>JSP 표준액션태그</th></tr>
+	 	<tr>
+	 		<td th:insert="~{${contentPage} :: ${cpFrag}"></td>
+	 	</tr>
+	 	
+	 </table>
+	 
+	 
+	<form action="index.do">
+		<table class="Tbl">
+			<tr>
+				<th>계산결과</th>
+			</tr>
+			<tr>
+				<td class="td2" align="center">
+					x + y = [[${result.result1}]]
+				</td>
+			</tr>
+			<tr>
+				<td class="td2" align="center">
+					x - y = [[${result.result2}]]
+				</td>
+			</tr>
+			<tr>
+				<td class="td2" align="center">
+					x * y = [[${result.result3}]]
+				</td>
+			</tr>
+			<tr>
+				<td class="td2" align="center">
+					x / y = [[${result.result4}]]
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button>다시 계산하러가기</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

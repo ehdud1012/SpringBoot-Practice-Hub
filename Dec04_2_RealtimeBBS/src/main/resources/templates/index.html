@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script src="http://192.168.0.56:23432/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+	function getDrink(){
+		$.getJSON("drink.get", function(drinkData){ 
+			$("#drinkTbl").empty();
+			$.each(drinkData.drink, function(a, b){
+				var nameTd = $("<td></<td>").text(b.name); 
+				var priceTd = $("<td></<td>").text(b.price);
+				$("#drinkTbl").append($("<tr></tr>").append(nameTd, priceTd));
+			});
+		});
+	}
+	$(function(){
+		var socket = io.connect("http://192.168.0.56:23432");
+		getDrink();
+		$("button").click(function(){
+			var n = $("#name").val();
+			var p = $("#price").val();
+			$.getJSON("drink.reg?name=" + n + "&price=" + p, function(result){ 
+				alert(result.result);
+				socket.emit("reg", "success");
+			});
+			$("#name").val("");
+			$("#price").val("");
+		});
+		socket.on("srvReg", function(msg){
+			getDrink();
+		});
+	});
+</script>
+</head>
+<body>
+	<input id="name"><p>
+	<input id="price"><p>
+	<button>등록</button>
+	<table id="drinkTbl" border="1">
+	</table>
+</body>
+</html>

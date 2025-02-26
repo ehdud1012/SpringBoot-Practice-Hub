@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="bmi.css">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="index.do">
+		<table class="bmiTbl">
+			<tr>
+				<th th:text="|${result.name}의 결과|" align="center"></th>
+			</tr>
+			<tr>
+				<td th:text="|${result.height} cm|" align="center"></td>
+			</tr>
+			<tr>
+				<td th:text="|${result.weight} kg|" align="center"></td>
+			</tr>
+			<tr>
+				<td th:text="${result.bmi}" align="center"></td>
+			</tr>
+			<tr>
+				<td th:text="${result.result}" align="center"></td>
+			</tr>
+			<tr>
+				<td align="center">
+					<button>처음으로 돌아가기</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

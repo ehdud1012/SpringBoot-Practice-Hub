@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		/*
+			SPA(Single Page Application) : react 
+				사이트 전체가 한 페이지 (스크롤 기반)
+		*/
+		var snsOffset = $("#sns").offset().top;
+		var dataroomOffset = $("#dataroom").offset().top;
+		var galleryOffset = $("#gallery").offset().top;
+		$("#snsGo").click(function() {
+			$(window).scrollTop(snsOffset);
+		});
+		$("#dataroomGo").click(function() {
+			// 순간이동
+			$(window).scrollTop(dataroomOffset);
+		});
+		$("#galleryGo").click(function() {
+			// 스크롤 애니메이션  (객체, 시간/1000) 스르륵 ~
+			$("html").animate({
+				scrollTop : galleryOffset
+			}, 500);
+		});
+		
+	});
+</script>
+<style type="text/css">
+	table {
+		position: fixed;
+		top: 10px;
+		background-color: white;
+	}
+</style>
+<body>
+	<table border="1">
+		<tr>
+			<td id="snsGo">SNS</td>
+			<td id="dataroomGo">DATAROOM</td>
+			<td id="galleryGo">GALLERY</td>
+		</tr>
+	</table>
+	<h1 id="sns">SNS</h1>
+	sns sns sns sns sns sns sns sns <br> sns sns sns sns sns sns sns sns <br> 
+	sns sns sns sns sns sns sns sns <br> sns sns sns sns sns sns sns sns <br> 
+	sns sns sns sns sns sns sns sns <br> sns sns sns sns sns sns sns sns <br> 
+	sns sns sns sns sns sns sns sns <br> sns sns sns sns sns sns sns sns <br> 
+	sns sns sns sns sns sns sns sns <br> sns sns sns sns sns sns sns sns <br> 
+	sns sns sns sns sns sns sns sns <br> sns sns sns sns sns sns sns sns <br> 
+	sns sns sns sns sns sns sns sns <br> sns sns sns sns sns sns sns sns <br> 
+	sns sns sns sns sns sns sns sns <br> sns sns sns sns sns sns sns sns <br> 
+	sns sns sns sns sns sns sns sns <br> sns sns sns sns sns sns sns sns <br> 
+	sns sns sns sns sns sns sns sns <br> sns sns sns sns sns sns sns sns <br> 
+	<h1 id="dataroom">자료실</h1>
+	dataroom dataroom dataroom dataroom dataroom dataroom <br>
+	dataroom dataroom dataroom dataroom dataroom dataroom <br>
+	dataroom dataroom dataroom dataroom dataroom dataroom <br>
+	dataroom dataroom dataroom dataroom dataroom dataroom <br>
+	dataroom dataroom dataroom dataroom dataroom dataroom <br>
+	dataroom dataroom dataroom dataroom dataroom dataroom <br>
+	dataroom dataroom dataroom dataroom dataroom dataroom <br>
+	dataroom dataroom dataroom dataroom dataroom dataroom <br>
+	dataroom dataroom dataroom dataroom dataroom dataroom <br>
+	<h1 id="gallery">갤러리</h1>
+	gallery gallery gallery gallery gallery gallery gallery gallery <br> 
+	gallery gallery gallery gallery gallery gallery gallery gallery <br> 
+	gallery gallery gallery gallery gallery gallery gallery gallery <br> 
+	gallery gallery gallery gallery gallery gallery gallery gallery <br> 
+	gallery gallery gallery gallery gallery gallery gallery gallery <br> 
+	gallery gallery gallery gallery gallery gallery gallery gallery <br> 
+	gallery gallery gallery gallery gallery gallery gallery gallery <br> 
+	
+	<hr>
+	z<br>z<br>z<br>z<br>z<br>z<br>z<br>z<br>
+	z<br>z<br>z<br>z<br>z<br>z<br>z<br>z<br>
+	z<br>z<br>z<br>z<br>z<br>z<br>z<br>z<br>
+	z<br>z<br>z<br>z<br>z<br>z<br>z<br>z<br>
+	z<br>z<br>z<br>z<br>z<br>z<br>z<br>z<br>
+	z<br>z<br>z<br>z<br>z<br>z<br>z<br>z<br>
+	z<br>z<br>z<br>z<br>z<br>z<br>z<br>z<br>
+	z<br>z<br>z<br>z<br>z<br>z<br>z<br>z<br>
+</body>
+</html>

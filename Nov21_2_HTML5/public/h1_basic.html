@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+canvas{
+	border: black solid 3px;
+}
+</style>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var paper = document.getElementById("paper");
+		// html5
+		var pen = paper.getContext("2d"); // canvas에 2d그림 그릴 펜
+		
+		// interpreter 방식이라 pen에 그릴거 세팅해놓은거
+		pen.fillRect(10, 20 , 30, 40);   // paper에 pen으로 (10, 20)에 30x40사이즈 사각형 그리기
+		pen.fillStyle = "#98db8a"; 		 // 색상 변경 
+		pen.fillRect(40, 60 , 100, 100); // 사각형 그리기
+		
+		pen.fillStyle = "#8ac1db";
+		setInterval(function() {
+			pen.fillRect(
+				Math.random() * 500, // 랜덤 위치에 사각형 찍기
+				Math.random() * 500,
+				50,50
+			);
+		}, 500);
+	});
+</script>
+</head>
+<body>
+	<!-- 
+		! 그래픽 !
+		**HTML5 역사**
+			HTML 4.01을 오랫동안 사용했고 스마트폰이 나오던 시기에 HTML5 출시
+			HTML5
+				- input type추가
+				- 의미있는 div추가 (<header> , <nav>, <footer>, ...)
+				- add-on 추가 없이 html만으로 구현
+					-> JavaScript에 내장 객체들이 추가
+	 -->
+	 <canvas id="paper" width="500px" height="500px"></canvas>
+</body>
+</html>

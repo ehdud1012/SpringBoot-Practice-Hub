@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	// JS/jQuery 둘 다 가능
+	// 현 상태의 HTML에서의 상태 변화
+	$(function() {
+		$("#b1").dblclick(function() {
+			// $(선택자).css("속성명", "값");
+			$("h1").css("background-color", "#679be3")
+		})
+		
+		var i =  $("input");
+		$("#b2").click(function() {
+			$("h1").css("background-color", i.val())
+		})
+		
+		// JS 타이머
+		// setTimeout(콜백함수, 시간(ms(milliseconds)));
+		//		시간 지나면 콜백함수 호출 (딜레이)
+		// setInterval(콜백함수, 시간(ms(milliseconds)));
+		//		시간마다 콜백함수 호출 (반복)
+		/*
+		setTimeout(function() {
+			alert("z");
+		}, 3000);
+		*/
+		var t = setInterval(function() {
+			// Math.random() : 0.0 이상 1.0 미만
+			var top = Math.random() * 1080;
+			var left = Math.random() * 1920;
+			$("img").css("top", top + "px");
+			$("img").css("left", left + "px");
+		}, 500);
+		
+		$("#b3").click(function() {
+			clearInterval(t);
+		});
+	});
+</script>
+<style type="text/css">
+	h1 {
+		background-color: #9be367;
+		transition: all 0.5s ease-out;
+	}
+	img {
+		position: fixed;
+		transition: all 0.3s ease-out;
+	}
+</style>
+</head>
+<body>
+	<h1>하윙</h1>
+	<button id="b1">1</button>
+	<hr>
+	<input>
+	<button id="b2">2</button>
+	<hr>
+	<button id="b3">stop</button>
+	<img src="pooh_winterfamily.png">
+	
+</body>
+</html>

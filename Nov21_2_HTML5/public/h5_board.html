@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+canvas{
+	border: black solid 3px;
+}
+</style>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var paper = document.getElementById("paper");
+		var pen = paper.getContext("2d");
+		var canvasX = $("#paper").offset().left;
+		var canvasY = $("#paper").offset().top;
+		
+		var startX = 0;
+		var startY = 0;
+		var endX = 0;
+		var endY = 0;
+		var click = false;
+		$("#paper").mousemove(function(e) {
+			if(click){
+				endX = e.pageX - canvasX;
+				endY = e.pageY - canvasY;
+				
+				pen.beginPath();
+				pen.moveTo(startX, startY);
+				pen.lineTo(e.pageX - canvasX ,  e.pageY - canvasY);
+				pen.closePath();
+				pen.stroke();
+				
+				startX = endX;
+				startY = endY;
+			}
+		});
+		$("#paper").mousedown(function(e) {
+			click = true;
+			startX = e.pageX - canvasX;
+			startY = e.pageY - canvasY;
+		});
+		$("#paper").mouseup(function(e) {
+			click = false;
+		});
+	});
+</script>
+</head>
+<body>
+	 <canvas id="paper" width="500px" height="500px"></canvas>
+</body>
+</html>

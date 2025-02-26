@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 
+	방법 1 - 링크걸기
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	방법 2 - JS파일로 가지고 다니기
+ -->
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+	// vanilla JS
+	
+	// KDYVaildChecker : 직접 만든 유효성 검사 lib
+	//					 함수 하나로 유효성검사 편하게
+	
+	// jQuery		   : JS전반적인 lib (패키지 여행)
+	//		문법 
+	//			- jQuery(선택자).이벤트(콜백함수);
+	//			- jQuery부분은 $로 바꿔도 됨 (근데 다른 lib에서 $을 쓰면 충돌)
+	//					$(선택자).이벤트(콜백함수);
+	//			- 선택자
+	//				기존 JS내장객체 (ex - document)
+	//				"CSS선택자"
+	//			- 이벤트
+	//				onclick, ondbclick, ...
+	//				에서 on만 때고 
+	//		callback함수
+	//			어떤 이벤트에 연결되어있어서 그 이벤트 일어나면 자동호출되는 함수
+	//		JS는 함수 이름 필요없으면 안써도 됨
+	
+	// 이 HTML(document)에서 ready이벤트 일어나면 test함수 자동호줄
+	//	= body의 onload랑 같음  => 사실상 jQuery의 main
+	/*
+		$(document).ready(function() {
+			alert("z");
+		}); 
+	*/
+	// 줄여쓰기
+	$(function() {
+		var xField = $("#x");
+		
+		$("button").click(function aaa() {
+			alert(xField.val());
+		})
+	});
+</script>
+</head>
+<body>
+	x : <input id="x"><p>
+	y : <input id="y"><p>
+	<button onclick="showX();">계산</button>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.canvasjs.com/jquery.canvasjs.min.js"></script>
+<script type="text/javascript">
+	//var local = [];
+	$(function() {
+		$.ajax({
+			url : "http://openapi.seoul.go.kr:8088/575a4655496b636839386f58586542/xml/RealtimeCityAir/1/25/",
+			success : function(dustData) {
+				var pm10 = [];
+				var pm25 = [];
+				$(dustData).find("row").each(function(index, dom){
+					var td1 = $("<td></td>").text($(dom).find("MSRRGN_NM").text());
+					var td2 = $("<td></td>").text($(dom).find("MSRSTE_NM").text());
+					var td3 = $("<td></td>").text($(dom).find("PM10").text());
+					var td4 = $("<td></td>").text($(dom).find("PM25").text());
+					var td5 = $("<td></td>").text($(dom).find("IDEX_NM").text());
+					var d = $("<tr></tr>").append(td1, td2, td3, td4, td5);
+					$("#dustSeoulTbl").append(d);
+					// JS에서 숫자 -> 글자 : +""
+					// JS에서 글자 -> 숫자 : *1
+					pm10[index] = { y: $(dom).find("PM10").text()*1, label: $(dom).find("MSRSTE_NM").text()};
+					pm25[index] = { y: $(dom).find("PM25").text()*1, label: $(dom).find("MSRSTE_NM").text()};
+				});
+				var chart = new CanvasJS.Chart("chartContainer",
+				{
+			     	title:{ text: "미세먼지" },
+					data: [{
+					        type: "stackedColumn",
+					        name: "PM10",
+							color: "#599567",
+					        dataPoints: pm10
+					     },  {
+					        type: "stackedColumn",
+					        name: "PM10",
+							color: "#605995",
+					        dataPoints: pm25
+					      }]
+				});
+				chart.render();
+			}
+		});
+		
+	});
+</script>
+
+</head>
+<body>
+	<table id="dustSeoulTbl" border="1">
+		<tr>
+			<th colspan="5">미세먼지</th>
+		</tr>
+	</table>
+	
+	<div id="chartContainer" style="height: 300px; width: 100%;">
+  </div>
+</body>
+</html>

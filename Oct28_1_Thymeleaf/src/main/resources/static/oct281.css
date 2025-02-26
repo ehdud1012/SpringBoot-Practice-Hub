@@ -1,0 +1,59 @@
+@charset "UTF-8";
+@font-face{
+	font-family: "k";
+	src: url("king.ttf");
+}
+
+body{
+	margin:0px;
+	padding: 0px;
+	font-family: "k";
+}
+
+.Tbl {
+	border: #16423C solid 3px;
+	box-shadow: 2px 2px 2px black;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	width: 210px;
+	background-color: #C4DAD2;
+	color: #16423C;
+	border-radius: 10px;
+	font-family: "k";
+}
+.Tbl th {
+	font-size: 25px;
+}
+.Tbl .td1{
+	width: 20px;
+	font-size: 20px;
+}
+.Tbl .td2{
+	width: 40px;
+	font-size: 20px;
+}
+
+.Tbl input {
+	width: 150px;
+	padding: 4px;
+	padding-right: 5px;
+	border: #16423C solid 1px;
+	border-radius: 10px;
+	background-color: #E9EFEC;
+	outline: none;
+	font-family: "k";
+}
+
+.Tbl button {
+	width: 200px;
+	height: 30px;
+	padding: 5px;
+	margin: 7px;
+	font-size: 15px;
+	background-color: #16423C;
+	border: none;
+	border-radius: 20px;
+	color: #C4DAD2;
+	font-family: "k";
+}
